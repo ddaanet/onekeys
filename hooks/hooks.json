@@ -1,0 +1,16 @@
+{
+  "description": "onekeys: expand single-character prompts via UserPromptSubmit.",
+  "hooks": {
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash ${CLAUDE_PLUGIN_ROOT}/scripts/onekeys-hook.sh",
+            "timeout": 5
+          }
+        ]
+      }
+    ]
+  }
+}
