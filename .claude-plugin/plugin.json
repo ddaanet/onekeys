@@ -1,0 +1,12 @@
+{
+  "name": "onekeys",
+  "version": "0.1.0",
+  "description": "Expand single-character Claude Code prompts into full instructions via a UserPromptSubmit hook. Type c for Continue, h for /handoff:handoff, etc.; mappings live in ~/.claude/onekeyers.txt.",
+  "author": {
+    "name": "David Allouche",
+    "email": "david@allouche.net"
+  },
+  "homepage": "https://github.com/ddaanet/onekeys",
+  "repository": "https://github.com/ddaanet/onekeys",
+  "license": "MIT"
+}
