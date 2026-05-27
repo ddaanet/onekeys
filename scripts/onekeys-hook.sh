@@ -61,8 +61,11 @@ main() {
     expansion="$(lookup "$trimmed")" || exit 0
 
     ctx="The user's prompt is the onekeys shorthand '${trimmed}', which expands to: ${expansion}. Act on the expansion as if the user had typed it; if it is a slash command, run that command."
-    jq -cn --arg ctx "$ctx" \
-        '{hookSpecificOutput: {hookEventName: "UserPromptSubmit", additionalContext: $ctx}}'
+    # systemMessage surfaces the expansion to the user so the shorthand is
+    # not silent; additionalContext is what Claude acts on.
+    msg="onekeys: ${trimmed} → ${expansion}"
+    jq -cn --arg ctx "$ctx" --arg msg "$msg" \
+        '{systemMessage: $msg, hookSpecificOutput: {hookEventName: "UserPromptSubmit", additionalContext: $ctx}}'
 }
 
 main

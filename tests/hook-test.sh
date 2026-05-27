@@ -60,6 +60,9 @@ run "w"; assert_contains "What do you think?"
 run "h"; assert_contains "/handoff:handoff"
 run "H"; assert_contains "/handoff and /commit"
 
+# A user-visible systemMessage echoes the expansion.
+run "c"; assert_contains '"systemMessage":"onekeys: c → Continue"'
+
 # Passthrough cases produce no output.
 run "x"; assert_empty
 run "hello"; assert_empty
