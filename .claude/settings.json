@@ -17,5 +17,9 @@
     "superpowers@claude-plugins-official": true,
     "ddaa@ddaanet": true,
     "gitlore@ddaanet": true
+  },
+  "gitlore": {
+    "enabled": true,
+    "precommitCommand": "just precommit"
   }
 }
