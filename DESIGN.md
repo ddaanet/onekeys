@@ -19,7 +19,7 @@ meaningless on its own, so the injected expansion dominates.
 Only a prompt whose trimmed text is exactly one character is a candidate.
 This is the disambiguation guard — ordinary multi-character prompts are
 never touched. Keys are case-sensitive so `h` (handoff) and `H` (handoff
-+ commit) are distinct.
++ commit + autoname) are distinct.
 
 ## Mapping: global, auto-seeded
 
