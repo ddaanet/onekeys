@@ -29,6 +29,35 @@ hook seeds the file with defaults when absent, making it
 self-bootstrapping and hand-editable. No project-level override — the
 extra precedence layer was judged unnecessary (YAGNI).
 
+## Keeping the mapping current: 3-way reconcile
+
+Seeding only on first run froze the file: once it existed, shipped changes
+to the defaults never reached an installed user. Reconcile fixes that
+without discarding their edits, by treating the file as a 3-way merge each
+time a onekey is pressed — MINE is the live file, OTHER is the shipped
+defaults, and **BASE** is `~/.claude/onekeyers.base.txt`, the defaults as
+of the last reconcile.
+
+The base is the load-bearing piece. A merge that knows only MINE and OTHER
+cannot tell a user's customization from a new default — every differing
+line looks like a conflict, and a conflict with no ancestor cannot explain
+*what* delta is being combined. Persisting BASE makes the common case
+(defaults unchanged since last reconcile) a single `cmp` and the conflict
+case legible. `diff3 -m` is used precisely because it emits the base
+section (`|||||||`) in conflicts; the two-way merge styles that omit it
+would defeat the point.
+
+On conflict the live file is left strictly untouched — it is the file the
+user types against, so injecting merge markers into it would be hostile.
+The merge instead lands in a sidecar (`~/.claude/onekeyers.txt.merge`) with
+a one-time `systemMessage` notice; once the user strips the markers, the
+next reconcile promotes the resolved sidecar and advances the base. The
+mainline (no conflict) stays fully transparent.
+
+Reconcile runs *behind* the single-character gate, so the every-prompt
+passthrough path is unchanged. `diff3` is a soft dependency: if it is
+absent the hook degrades to seed-on-first-run rather than failing.
+
 ## Release infrastructure
 
 The repo consumes `claude-plugin-dev` (vendored at `v0.2.0` via

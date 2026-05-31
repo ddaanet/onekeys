@@ -37,6 +37,29 @@ key from the expansion, so expansions may contain spaces. Keys are
 single characters and case-sensitive (`h` and `H` differ). Blank lines
 and `#` comments are ignored. Edit the file to add your own.
 
+## Staying current with new defaults
+
+The mapping is not frozen after the first run. When a new onekeys version
+ships different defaults, your file is **reconciled** with them on the
+next single-character prompt — a 3-way merge (via `diff3`) that pulls in
+the new defaults while keeping your own edits.
+
+To do this without guessing, onekeys keeps a second file,
+`~/.claude/onekeyers.base.txt`, recording the defaults as of the last
+reconcile. It is the common ancestor of the merge; leave it alone.
+
+- **No clash** → the merge is applied silently. You just get the new
+  defaults, your customizations intact.
+- **A clash** (you edited a key the new defaults also changed) → onekeys
+  does **not** touch your live file. It writes the merge — with the
+  ancestor shown between `<<<<<<<`/`|||||||`/`>>>>>>>` markers so the
+  three versions are legible — to `~/.claude/onekeyers.txt.merge` and
+  nudges you once. Resolve that file, delete the markers, and the next
+  onekey press promotes it into place.
+
+Requires `diff3` (from GNU diffutils, normally already present). Without
+it, onekeys falls back to seed-on-first-run and never reconciles.
+
 ## License
 
 MIT

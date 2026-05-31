@@ -14,8 +14,10 @@ the full spec.
 - `scripts/onekeys-hook.sh` — the hook. Reads `.prompt` from stdin JSON;
   if the trimmed prompt is exactly one character present in
   `~/.claude/onekeyers.txt`, emits `additionalContext` with the
-  expansion; otherwise no output. Seeds the mapping with defaults when
-  absent.
+  expansion; otherwise no output. On each single-character prompt it also
+  *reconciles* the mapping with the shipped defaults via a 3-way `diff3`
+  merge, using `~/.claude/onekeyers.base.txt` as the common ancestor and
+  `~/.claude/onekeyers.txt.merge` as the conflict sidecar. See `DESIGN.md`.
 - `hooks/hooks.json` — registers the hook on `UserPromptSubmit`.
 - `tests/hook-test.sh` — runs the hook under a temporary `HOME`.
 - `plugin-dev/` — vendored `claude-plugin-dev` toolkit (release recipe +
@@ -39,7 +41,15 @@ scripts, and runs the hook tests. Must be green before committing.
   command.** It only injects context. Don't design features that assume
   otherwise.
 - **The mapping is global** (`~/.claude/onekeyers.txt`). Tests must run
-  under a temporary `HOME` so they never touch the real file.
+  under a temporary `HOME` so they never touch the real file — and the
+  reconcile logic touches two siblings (`onekeyers.base.txt`,
+  `onekeyers.txt.merge`), so tests must account for those too.
+- **Reconcile runs behind the single-character gate**, never on the
+  passthrough path, so the no-match cost stays a trim plus a length
+  check. The default mapping lives in one place — `print_defaults` — which
+  is both the seed and the merge's OTHER side; never duplicate it.
+- **`diff3` is a soft dependency.** Missing it (or a `diff3` error)
+  degrades to seed-on-first-run; the hook must never break the prompt.
 - **`${CLAUDE_PLUGIN_ROOT}` in `hooks/hooks.json` is expanded by Claude
   Code at hook-fire time**, not by the shell. Keep it literal.
 - **`plugin.json`'s `.version` is the last released version**; the
