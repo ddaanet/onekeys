@@ -14,10 +14,11 @@ set -euo pipefail
 
 MAP_FILE="${HOME}/.claude/onekeyers.txt"
 
-seed_if_absent() {
-    [[ -e "$MAP_FILE" ]] && return 0
-    mkdir -p "$(dirname "$MAP_FILE")"
-    cat >"$MAP_FILE" <<'EOF'
+# print_defaults -> writes the shipped default mapping to stdout. Single
+# source of truth for both seeding and reconciliation (the "OTHER" side of
+# the 3-way merge).
+print_defaults() {
+    cat <<'EOF'
 c Continue
 r Retry
 h /handoff:handoff
@@ -27,6 +28,12 @@ n Next?
 w What do you think?
 y Yes
 EOF
+}
+
+seed_if_absent() {
+    [[ -e "$MAP_FILE" ]] && return 0
+    mkdir -p "$(dirname "$MAP_FILE")"
+    print_defaults >"$MAP_FILE"
 }
 
 # lookup KEY -> prints the expansion for a single-character KEY, or
