@@ -23,7 +23,7 @@ r Retry
 h /handoff:handoff
 H /handoff, /commit, /autoname
 t /autoname
-n No
+n Next?
 w What do you think?
 y Yes
 EOF

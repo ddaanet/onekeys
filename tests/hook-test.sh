@@ -52,7 +52,7 @@ fi
 # Plain-instruction expansion.
 run "c"; assert_contains "Continue"
 run "r"; assert_contains "Retry"
-run "n"; assert_contains "No"
+run "n"; assert_contains "Next?"
 run "y"; assert_contains "Yes"
 run "w"; assert_contains "What do you think?"
 
