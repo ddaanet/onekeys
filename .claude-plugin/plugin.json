@@ -1,6 +1,6 @@
 {
   "name": "onekeys",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Expand single-character Claude Code prompts into full instructions via a UserPromptSubmit hook. Type c for Continue, h for /handoff:handoff, etc.; mappings live in ~/.claude/onekeyers.txt.",
   "author": {
     "name": "David Allouche",
