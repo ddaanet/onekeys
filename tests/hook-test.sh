@@ -58,7 +58,7 @@ assert_path_absent() {
     if [[ -e "$1" ]]; then echo "FAIL: $2 ($1 exists)"; fails=$((fails + 1)); else echo "PASS: $2"; fi
 }
 
-# Seeding: mapping absent, first run creates it with the 8 defaults.
+# Seeding: mapping absent, first run creates it with the 7 defaults.
 [[ -e "$MAP_FILE" ]] && { echo "FAIL: map file should not exist yet"; fails=$((fails + 1)); }
 run "c"
 if [[ -f "$MAP_FILE" ]]; then
@@ -68,10 +68,10 @@ else
     fails=$((fails + 1))
 fi
 lines="$(grep -cve '^[[:space:]]*$' "$MAP_FILE" 2>/dev/null || echo 0)"
-if [[ "$lines" -eq 8 ]]; then
-    echo "PASS: seeded mapping has 8 entries"
+if [[ "$lines" -eq 7 ]]; then
+    echo "PASS: seeded mapping has 7 entries"
 else
-    echo "FAIL: expected 8 seeded entries, got $lines"
+    echo "FAIL: expected 7 seeded entries, got $lines"
     fails=$((fails + 1))
 fi
 # The base (merge ancestor) is seeded alongside the live mapping.
@@ -91,8 +91,7 @@ run "w"; assert_contains "What do you think?"
 
 # Slash-command expansions, including case sensitivity (h vs H).
 run "h"; assert_contains "/handoff:handoff"
-run "H"; assert_contains "/handoff, /commit, /autoname"
-run "t"; assert_contains "/autoname"
+run "H"; assert_contains "/handoff, /commit"
 
 # A user-visible systemMessage echoes the expansion.
 run "c"; assert_contains '"systemMessage":"onekeys: c → Continue"'
@@ -120,14 +119,14 @@ assert_path_absent "$SIDECAR" "no-op writes no sidecar"
 
 # Clean merge (mainline): shipped defaults re-add a line the user's base
 # lacked; a non-overlapping custom line is preserved. Applied transparently.
-grep -Fv 't /autoname' "$DEFAULTS" >"$BASE_FILE"     # base predates the t key
+grep -Fv 'n Next?' "$DEFAULTS" >"$BASE_FILE"          # base predates the n key
 cp "$BASE_FILE" "$MAP_FILE"; printf 'z Foo\n' >>"$MAP_FILE"
 rm -f "$SIDECAR"
 run "c"
-assert_file_has "$MAP_FILE" "t /autoname" "clean merge pulls in the new default"
+assert_file_has "$MAP_FILE" "n Next?" "clean merge pulls in the new default"
 assert_file_has "$MAP_FILE" "z Foo" "clean merge keeps the custom line"
 assert_path_absent "$SIDECAR" "clean merge writes no sidecar"
-assert_file_has "$BASE_FILE" "t /autoname" "clean merge advances the base"
+assert_file_has "$BASE_FILE" "n Next?" "clean merge advances the base"
 
 # Conflict: base, live, and shipped default all differ on the same key.
 # diff3 conflicts; the sidecar must carry the base section (option b).
