@@ -25,8 +25,7 @@ defaults on first use:
 c Continue
 r Retry
 h /handoff:handoff
-H /handoff, /commit, /autoname
-t /autoname
+H /handoff, /commit
 n Next?
 w What do you think?
 y Yes
