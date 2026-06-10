@@ -26,7 +26,8 @@ c Continue
 r Retry
 h /handoff:handoff
 H /handoff, /commit
-n Next?
+n What's next?
+s Status.
 w What do you think?
 y Yes
 ```
