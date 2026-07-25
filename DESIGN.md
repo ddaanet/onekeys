@@ -29,6 +29,16 @@ hook seeds the file with defaults when absent, making it
 self-bootstrapping and hand-editable. No project-level override — the
 extra precedence layer was judged unnecessary (YAGNI).
 
+## Expansions are imperatives
+
+An expansion arrives as `additionalContext` with no other user text to
+anchor it, so the expansion alone determines the action. A default whose
+text reads as a topic rather than an instruction leaves the choice to
+inference, and keys with overlapping meanings collapse into whichever
+reading is most available. So each default names its action outright, plus
+any constraint that distinguishes it — `p` is "List pending tasks, no tool
+use allowed.", not "What's next?".
+
 ## Keeping the mapping current: 3-way reconcile
 
 Seeding only on first run froze the file: once it existed, shipped changes

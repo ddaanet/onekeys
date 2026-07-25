@@ -31,8 +31,7 @@ c Continue
 r Retry
 h /handoff:handoff
 H /handoff, /commit
-n What's next?
-s Status.
+p List pending tasks, no tool use allowed.
 w What do you think?
 y Yes
 EOF
