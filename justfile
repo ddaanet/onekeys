@@ -6,3 +6,6 @@ precommit:
 	bash -n scripts/*.sh
 	shellcheck scripts/*.sh tests/*.sh
 	bash tests/hook-test.sh
+
+# Checks that run before a release. Add slow or paid checks here.
+prerelease: precommit

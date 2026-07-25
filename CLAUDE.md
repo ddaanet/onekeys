@@ -33,6 +33,10 @@ just precommit
 Validates the manifest and hooks JSON, parses and shellchecks the
 scripts, and runs the hook tests. Must be green before committing.
 
+`just release` gates on `prerelease`, not on `precommit` directly. Here
+the two are the same (`prerelease: precommit`); the indirection exists so
+a slower release-only check can be added without slowing every commit.
+
 ## Conventions
 
 - **The hook fires on every prompt** (`UserPromptSubmit` takes no
