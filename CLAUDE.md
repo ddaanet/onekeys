@@ -5,9 +5,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 # onekeys
 
 A Claude Code plugin: a `UserPromptSubmit` hook that expands
-single-character prompts into full instructions. See `DESIGN.md` for the
-rationale and `docs/superpowers/specs/2026-05-27-onekeys-design.md` for
-the full spec.
+single-character prompts into full instructions. See `docs/design.md` for
+the rationale and `plans/2026-05-27-onekeys-design.md` for the full spec.
 
 ## Layout
 
@@ -17,11 +16,18 @@ the full spec.
   expansion; otherwise no output. On each single-character prompt it also
   *reconciles* the mapping with the shipped defaults via a 3-way `diff3`
   merge, using `~/.claude/onekeyers.base.txt` as the common ancestor and
-  `~/.claude/onekeyers.txt.merge` as the conflict sidecar. See `DESIGN.md`.
+  `~/.claude/onekeyers.txt.merge` as the conflict sidecar. See
+  `docs/design.md`.
 - `hooks/hooks.json` — registers the hook on `UserPromptSubmit`.
 - `tests/hook-test.sh` — runs the hook under a temporary `HOME`.
 - `plugin-dev/` — vendored `claude-plugin-dev` toolkit (release recipe +
   version-guard hook).
+- `docs/design.md` — living rationale for every design decision. Present
+  tense; rewritten in place when a decision is overturned.
+- `docs/changelog.md` — index of write-time records, newest first, one
+  line per entry. Bodies live in `docs/changelog/YYYY-MM-DD-slug.md`.
+- `plans/` — specs and implementation plans. Prospective content only;
+  `docs/` holds what is true now.
 
 ## Quality gate
 

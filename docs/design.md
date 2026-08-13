@@ -2,7 +2,7 @@
 
 Living design document: why the project has the shape it has. The full
 original specification is at
-`docs/superpowers/specs/2026-05-27-onekeys-design.md`.
+`plans/2026-05-27-onekeys-design.md`.
 
 ## Mechanism
 
