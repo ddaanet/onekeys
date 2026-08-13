@@ -21,8 +21,7 @@ the full spec.
 - `hooks/hooks.json` — registers the hook on `UserPromptSubmit`.
 - `tests/hook-test.sh` — runs the hook under a temporary `HOME`.
 - `plugin-dev/` — vendored `claude-plugin-dev` toolkit (release recipe +
-  version-guard hook). Do not edit by hand; update with
-  `just update-plugin-dev vX.Y.Z`.
+  version-guard hook).
 
 ## Quality gate
 
@@ -68,3 +67,5 @@ just release [patch|minor|major]
 
 Provided by the vendored `plugin-dev/release.just`. See
 `plugin-dev/README.md`.
+
+@memory/ddaanet/shared-claude.md
