@@ -1,5 +1,3 @@
-This session finished three onekeys briefs, all committed: the plugin-dev v0.5.3 vendor update, the shared-claude.md import into CLAUDE.md, and the docs/ + plans/ layout migration. It also fixed a leaked `plugin-dev/memory` gitlink the v0.5.3 pull carried in. Two upstream briefs were dropped as untracked files for their maintainers (not committed by this session, per the other-repos-stay-read-only rule): `claude-plugin-dev`'s `brief-update-plugin-dev-bootstrap-gap.md` and `gitlore`'s `brief-resolve-noisy-noop-failure.md`.
+## Current task
 
-## Open decisions
-
-- onekeys' `memory/MEMORY.md` (root project index) and `memory/ddaanet/MEMORY.md` (tier carrier) still name many facts with old prefixed filenames (`ddaanet/reference_foo.md`, `feedback_bar.md`) that no longer exist in the ddaanet tier — the tier renamed to short-slug filenames in its own history (tier commit `fc6e178` and earlier). Needs a careful line-by-line resync — rewrite each stale pointer to the tier's current filename, verified against `memory/ddaanet/*.md` before editing — rather than another blind edit: gitlore's automatic composition hook unions root+tier content on any Write/Edit and will re-duplicate content again if touched carelessly, as it did earlier this session.
+Memory index drift between memory/MEMORY.md and memory/ddaanet/MEMORY.md is fixed and being committed. Next in sequence: push memory via /gitlore:push, have a Sonnet subagent execute the two briefs in inbox/ (plugin-dev 0.6.1 update, https submodule URLs), cut a patch release, then handoff again.
