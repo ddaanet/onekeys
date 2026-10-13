@@ -1,3 +1,3 @@
 ## Current task
 
-Memory index drift between memory/MEMORY.md and memory/ddaanet/MEMORY.md is fixed and being committed. Next in sequence: push memory via /gitlore:push, have a Sonnet subagent execute the two briefs in inbox/ (plugin-dev 0.6.1 update, https submodule URLs), cut a patch release, then handoff again.
+The memory index dedupe, the plugin-dev 0.6.1 update, the https submodule urls and the v0.3.4 release have landed; the memory remote was renamed to ddaanet/onekeys-memory and made public. What remains is verification of the keyless install and the memory index compaction.

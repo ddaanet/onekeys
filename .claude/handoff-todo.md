@@ -1,7 +1,5 @@
 ## Remaining
 
-- Push committed memory with /gitlore:push.
-- Dispatch a Sonnet subagent to execute both briefs in inbox/ (brief-plugin-dev-0.6.1.md, brief-https-submodule-urls.md), naming an output file for its report; verify each brief's recommendation before implementing.
-- Run `just release patch` once precommit is green.
-- Run /handoff again after the release.
+- Run the brief's anonymous recursive clone of https://github.com/ddaanet/onekeys.git to confirm a keyless install now succeeds (both memory repos are public).
+- Relaunch Claude Code with `claude -c`: the gitlore plugin is at 0.9.0 but the session ran 0.5.0, and the release skipped gitlore's hooks dir refresh.
 - Compact memory/MEMORY.md (~25.6KB) and memory/ddaanet/MEMORY.md (~24.5KB) below Claude Code's 24.4KB load cap, as a retirement/relocation pass per the index-compaction-triggers fact.
