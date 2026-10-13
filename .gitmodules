@@ -1,3 +1,3 @@
 [submodule "gitlore-memory"]
 	path = memory
-	url = git@github.com:ddaanet/onekeys-gitlore-memory.git
+	url = https://github.com/ddaanet/onekeys-memory.git
