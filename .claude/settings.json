@@ -13,12 +13,7 @@
     ]
   },
   "enabledPlugins": {
-    "skill-creator@claude-plugins-official": true,
-    "superpowers@claude-plugins-official": true,
-    "ddaa@ddaanet": true,
-    "gitlore@ddaanet": true,
-    "plugin-dev@claude-plugins-official": true,
-    "shell-scripting@ddaanet": true
+    "skill-creator@claude-plugins-official": true
   },
   "gitlore": {
     "enabled": true,

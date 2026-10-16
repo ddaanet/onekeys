@@ -7,3 +7,4 @@ __pycache__/
 # Provisional handoff scratch — until gitlore is installed
 .claude/handoff.md
 .claude/handoff-task.md
+/.mcp.json
