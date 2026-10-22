@@ -1,6 +1,6 @@
 import 'plugin-dev/release.just'
 
-precommit:
+precommit: check-refs
 	jq . .claude-plugin/plugin.json > /dev/null
 	jq . hooks/hooks.json > /dev/null
 	bash -n scripts/*.sh
