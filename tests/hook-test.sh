@@ -82,6 +82,16 @@ assert_path_present "$BASE_FILE" "base file seeded alongside mapping"
 DEFAULTS="$TEST_HOME/defaults.snapshot"
 cp "$MAP_FILE" "$DEFAULTS"
 
+# The README's defaults block (the first fence after "## Mapping") is a
+# hand copy of print_defaults: it must match the seed exactly.
+README="$(dirname "$HOOK")/../README.md"
+if diff -u "$DEFAULTS" <(awk '/^## Mapping/{m=1} m&&/^```/{if(f)exit; f=1; next} f' "$README"); then
+    echo "PASS: README defaults block matches print_defaults"
+else
+    echo "FAIL: README defaults block differs from print_defaults (diff above)"
+    fails=$((fails + 1))
+fi
+
 # Plain-instruction expansion.
 run "c"; assert_contains "Continue"
 run "r"; assert_contains "Retry"
