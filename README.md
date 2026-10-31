@@ -13,7 +13,7 @@ prompts pass through untouched.
 
 A hook cannot rewrite your prompt or run a slash command directly, so
 onekeys injects the expansion as authoritative intent. For slash-command
-expansions (e.g. `h → /handoff:handoff`) Claude invokes the matching
+expansions (e.g. `h → /autodrive-handoff:handoff`) Claude invokes the matching
 command/skill itself.
 
 ## Mapping
@@ -24,10 +24,9 @@ defaults on first use:
 ```
 c Continue
 r Retry
-h /handoff:handoff
-H /handoff, /commit
-n What's next?
-s Status.
+h /autodrive-handoff:handoff
+H /autodrive-handoff:handoff and commit
+p List pending tasks, no tool use allowed.
 w What do you think?
 y Yes
 ```
@@ -50,7 +49,8 @@ reconcile. It is the common ancestor of the merge; leave it alone.
 
 - **No clash** → the merge is applied silently. You just get the new
   defaults, your customizations intact.
-- **A clash** (you edited a key the new defaults also changed) → onekeys
+- **A clash** (you edited a line the new defaults also changed, or a line
+  next to one: `diff3` compares lines, not keys) → onekeys
   does **not** touch your live file. It writes the merge — with the
   ancestor shown between `<<<<<<<`/`|||||||`/`>>>>>>>` markers so the
   three versions are legible — to `~/.claude/onekeyers.txt.merge` and
