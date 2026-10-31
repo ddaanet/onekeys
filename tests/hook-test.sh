@@ -89,8 +89,9 @@ run "p"; assert_contains "List pending tasks, no tool use allowed."
 run "y"; assert_contains "Yes"
 run "w"; assert_contains "What do you think?"
 
-# Slash-command expansions, including case sensitivity (h vs H).
-run "h"; assert_contains "/autodrive-handoff:handoff"
+# Slash-command expansions, including case sensitivity (h vs H). h's
+# expansion is a prefix of H's, so h is pinned by its whole systemMessage.
+run "h"; assert_contains '"systemMessage":"onekeys: h → /autodrive-handoff:handoff"'
 run "H"; assert_contains "/autodrive-handoff:handoff and commit"
 
 # A user-visible systemMessage echoes the expansion.
@@ -127,6 +128,30 @@ assert_file_has "$MAP_FILE" "p List pending" "clean merge pulls in the new defau
 assert_file_has "$MAP_FILE" "z Foo" "clean merge keeps the custom line"
 assert_path_absent "$SIDECAR" "clean merge writes no sidecar"
 assert_file_has "$BASE_FILE" "p List pending" "clean merge advances the base"
+
+# Upgrade from v0.3.6: untouched old defaults (h and H named the handoff
+# plugin before its rename) take the new h and H lines in one press.
+OLD_DEFAULTS="$TEST_HOME/v0.3.6.defaults"
+cat >"$OLD_DEFAULTS" <<'EOF'
+c Continue
+r Retry
+h /handoff:handoff
+H /handoff, /commit
+p List pending tasks, no tool use allowed.
+w What do you think?
+y Yes
+EOF
+cp "$OLD_DEFAULTS" "$BASE_FILE"
+cp "$OLD_DEFAULTS" "$MAP_FILE"
+rm -f "$SIDECAR"
+run "h"
+assert_contains '"systemMessage":"onekeys: h → /autodrive-handoff:handoff"'
+assert_file_has "$MAP_FILE" "h /autodrive-handoff:handoff" "upgrade pulls in the new h"
+assert_file_has "$MAP_FILE" "H /autodrive-handoff:handoff and commit" "upgrade pulls in the new H"
+assert_file_lacks "$MAP_FILE" "h /handoff:handoff" "upgrade drops the old h"
+assert_file_lacks "$MAP_FILE" "H /handoff, /commit" "upgrade drops the old H"
+assert_path_absent "$SIDECAR" "upgrade writes no sidecar"
+assert_file_has "$BASE_FILE" "h /autodrive-handoff:handoff" "upgrade advances the base"
 
 # Conflict: base, live, and shipped default all differ on the same key.
 # diff3 conflicts; the sidecar must carry the base section (option b).

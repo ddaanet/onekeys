@@ -3,6 +3,8 @@ __pycache__/
 .DS_Store
 
 .claude/settings.local.json
+# autodrive-handoff transition state (sentinel, lock, failure record).
+.claude/autodrive*
 
 /.mcp.json
 

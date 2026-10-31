@@ -49,7 +49,8 @@ reconcile. It is the common ancestor of the merge; leave it alone.
 
 - **No clash** → the merge is applied silently. You just get the new
   defaults, your customizations intact.
-- **A clash** (you edited a key the new defaults also changed) → onekeys
+- **A clash** (you edited a line the new defaults also changed, or a line
+  next to one: `diff3` compares lines, not keys) → onekeys
   does **not** touch your live file. It writes the merge — with the
   ancestor shown between `<<<<<<<`/`|||||||`/`>>>>>>>` markers so the
   three versions are legible — to `~/.claude/onekeyers.txt.merge` and
