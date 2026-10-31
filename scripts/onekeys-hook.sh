@@ -30,7 +30,7 @@ print_defaults() {
 c Continue
 r Retry
 h /autodrive-handoff:handoff
-H /autodrive:handoff and commit
+H /autodrive-handoff:handoff and commit
 p List pending tasks, no tool use allowed.
 w What do you think?
 y Yes

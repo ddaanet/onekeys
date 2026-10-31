@@ -25,7 +25,7 @@ defaults on first use:
 c Continue
 r Retry
 h /autodrive-handoff:handoff
-H /autodrive:handoff and commit
+H /autodrive-handoff:handoff and commit
 n What's next?
 s Status.
 w What do you think?

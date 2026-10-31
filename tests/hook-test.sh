@@ -91,7 +91,7 @@ run "w"; assert_contains "What do you think?"
 
 # Slash-command expansions, including case sensitivity (h vs H).
 run "h"; assert_contains "/autodrive-handoff:handoff"
-run "H"; assert_contains "/autodrive:handoff and commit"
+run "H"; assert_contains "/autodrive-handoff:handoff and commit"
 
 # A user-visible systemMessage echoes the expansion.
 run "c"; assert_contains '"systemMessage":"onekeys: c → Continue"'
