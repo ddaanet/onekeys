@@ -26,8 +26,7 @@ c Continue
 r Retry
 h /autodrive-handoff:handoff
 H /autodrive-handoff:handoff and commit
-n What's next?
-s Status.
+p List pending tasks, no tool use allowed.
 w What do you think?
 y Yes
 ```
