@@ -29,8 +29,8 @@ print_defaults() {
     cat <<'EOF'
 c Continue
 r Retry
-h /handoff:handoff
-H /handoff, /commit
+h /autodrive-handoff:handoff
+H /autodrive:handoff and commit
 p List pending tasks, no tool use allowed.
 w What do you think?
 y Yes

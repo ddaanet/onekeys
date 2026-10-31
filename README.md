@@ -13,7 +13,7 @@ prompts pass through untouched.
 
 A hook cannot rewrite your prompt or run a slash command directly, so
 onekeys injects the expansion as authoritative intent. For slash-command
-expansions (e.g. `h → /handoff:handoff`) Claude invokes the matching
+expansions (e.g. `h → /autodrive-handoff:handoff`) Claude invokes the matching
 command/skill itself.
 
 ## Mapping
@@ -24,8 +24,8 @@ defaults on first use:
 ```
 c Continue
 r Retry
-h /handoff:handoff
-H /handoff, /commit
+h /autodrive-handoff:handoff
+H /autodrive:handoff and commit
 n What's next?
 s Status.
 w What do you think?
