@@ -141,11 +141,11 @@ assert_file_has "$BASE_FILE" "p List pending" "clean merge advances the base"
 
 # Upgrade to the e default with a custom key at the end of the file: e sits
 # mid-block, so the two insertions do not collide and the same press expands.
-grep -Fv 'e enter:' "$DEFAULTS" >"$BASE_FILE"   # base predates the e key
+grep -Fv 'e Enter:' "$DEFAULTS" >"$BASE_FILE"   # base predates the e key
 cp "$BASE_FILE" "$MAP_FILE"; printf 'z Foo\n' >>"$MAP_FILE"
 rm -f "$SIDECAR"
 run "e"
-assert_contains '"systemMessage":"onekeys: e → enter: accept defaults and go ahead"'
+assert_contains '"systemMessage":"onekeys: e → Enter: accept defaults and go ahead"'
 assert_file_has "$MAP_FILE" "z Foo" "e upgrade keeps the appended custom line"
 assert_path_absent "$SIDECAR" "e upgrade writes no sidecar"
 
