@@ -68,10 +68,10 @@ else
     fails=$((fails + 1))
 fi
 lines="$(grep -cve '^[[:space:]]*$' "$MAP_FILE" 2>/dev/null || echo 0)"
-if [[ "$lines" -eq 7 ]]; then
-    echo "PASS: seeded mapping has 7 entries"
+if [[ "$lines" -eq 8 ]]; then
+    echo "PASS: seeded mapping has 8 entries"
 else
-    echo "FAIL: expected 7 seeded entries, got $lines"
+    echo "FAIL: expected 8 seeded entries, got $lines"
     fails=$((fails + 1))
 fi
 # The base (merge ancestor) is seeded alongside the live mapping.
