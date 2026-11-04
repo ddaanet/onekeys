@@ -24,8 +24,6 @@ the rationale and `plans/2026-05-27-onekeys-design.md` for the full spec.
   version-guard hook).
 - `docs/design.md` — living rationale for every design decision. Present
   tense; rewritten in place when a decision is overturned.
-- `docs/changelog.md` — index of write-time records, newest first, one
-  line per entry. Bodies live in `docs/changelog/YYYY-MM-DD-slug.md`.
 - `plans/` — specs and implementation plans. Prospective content only;
   `docs/` holds what is true now.
 
