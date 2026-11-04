@@ -23,13 +23,13 @@ defaults on first use:
 
 ```
 c Continue
+e enter: accept defaults and go ahead
 r Retry
 h /autodrive-handoff:handoff
 H /autodrive-handoff:handoff and commit
 p List pending tasks, no tool use allowed.
 w What do you think?
 y Yes
-e enter: accept defaults and go ahead
 ```
 
 Format: `char<space>expansion`, one per line. The first space splits the

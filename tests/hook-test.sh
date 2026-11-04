@@ -58,7 +58,7 @@ assert_path_absent() {
     if [[ -e "$1" ]]; then echo "FAIL: $2 ($1 exists)"; fails=$((fails + 1)); else echo "PASS: $2"; fi
 }
 
-# Seeding: mapping absent, first run creates it with the 7 defaults.
+# Seeding: mapping absent, first run creates it with the 8 defaults.
 [[ -e "$MAP_FILE" ]] && { echo "FAIL: map file should not exist yet"; fails=$((fails + 1)); }
 run "c"
 if [[ -f "$MAP_FILE" ]]; then
@@ -138,6 +138,16 @@ assert_file_has "$MAP_FILE" "p List pending" "clean merge pulls in the new defau
 assert_file_has "$MAP_FILE" "z Foo" "clean merge keeps the custom line"
 assert_path_absent "$SIDECAR" "clean merge writes no sidecar"
 assert_file_has "$BASE_FILE" "p List pending" "clean merge advances the base"
+
+# Upgrade to the e default with a custom key at the end of the file: e sits
+# mid-block, so the two insertions do not collide and the same press expands.
+grep -Fv 'e enter:' "$DEFAULTS" >"$BASE_FILE"   # base predates the e key
+cp "$BASE_FILE" "$MAP_FILE"; printf 'z Foo\n' >>"$MAP_FILE"
+rm -f "$SIDECAR"
+run "e"
+assert_contains '"systemMessage":"onekeys: e → enter: accept defaults and go ahead"'
+assert_file_has "$MAP_FILE" "z Foo" "e upgrade keeps the appended custom line"
+assert_path_absent "$SIDECAR" "e upgrade writes no sidecar"
 
 # Upgrade from v0.3.6: untouched old defaults (h and H named the handoff
 # plugin before its rename) take the new h and H lines in one press.
