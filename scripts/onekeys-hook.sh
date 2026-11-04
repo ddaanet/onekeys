@@ -28,6 +28,7 @@ NAG=""
 print_defaults() {
     cat <<'EOF'
 c Continue
+e Enter: accept defaults and go ahead
 r Retry
 h /autodrive-handoff:handoff
 H /autodrive-handoff:handoff and commit
